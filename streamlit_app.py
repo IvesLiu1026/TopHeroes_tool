@@ -106,8 +106,9 @@ with tab1:
 
     st.subheader("⚙️ Build Settings")
     guild_helps = st.number_input("Expected Guild Helps", 0, 100, 20)
-    speed_boost_percent = st.number_input("Speed Boost (%)", 0, 500, 110)
-    free_speedup_minutes = st.number_input("Free Speedup (minutes)", 0, 60, 5)
+    speed_boost_percent = st.number_input("Healing Speed Boost (%)", 0, 500, 110)
+    # free_speedup_minutes = st.number_input("Free Speedup (minutes)", 0, 60, 5)
+    free_speedup_minutes = 0
     free_speedup_seconds = free_speedup_minutes * 60
 
     if st.button("Calculate 🔍"):
