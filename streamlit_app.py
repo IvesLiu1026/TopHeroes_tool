@@ -11,8 +11,8 @@ def simulate_with_helps1(effective_seconds, speed_boost_percent, guild_helps):
 
     for _ in range(guild_helps):
         reduction = max(remaining * 0.01, 60)  # simulate help delay
-        delay = random.uniform(10, 20)
-        remaining -= (reduction - delay)
+        delay = random.uniform(40, 60)
+        remaining -= (reduction + delay)
         if remaining <= 0:
             return 0
     return remaining
@@ -22,8 +22,8 @@ def simulate_with_helps(effective_seconds, guild_helps):
     remaining = effective_seconds
     for _ in range(guild_helps):
         reduction = max(remaining * 0.01, 60)
-        delay = random.uniform(10, 20)
-        remaining -= (reduction - delay)
+        delay = random.uniform(40, 60)
+        remaining -= (reduction + delay)
         if remaining <= 60:
             remaining = 0
     return remaining
