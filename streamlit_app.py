@@ -170,15 +170,15 @@ with tab3:
 
     with col1:
         start_date2 = st.date_input("Start Date (Boosted Timer)", key="start_date2")
-        timer_days = st.number_input("Start Timer Days", 0, 30, 1)
+        timer_days = st.number_input("Start Timer Days", 0, 999, 1)
         timer_hours = st.number_input("Start Timer Hours", 0, 23, 0)
         timer_minutes = st.number_input("Start Timer Minutes", 0, 59, 0)
         timer_seconds = st.number_input("Start Timer Seconds", 0, 59, 0)
-        current_boost = st.number_input("Current Boost (%)", 0, 500, 110)
+        current_boost = st.number_input("Current Boost (%)", 0.0, 500.0, 0.0)
 
     with col2:
         start_time2 = st.time_input("Start Time (Boosted Timer)", key="start_time2")
-        title_bonus = st.number_input("Title Boost (%)", 0, 100, 10)
+        title_bonus = st.number_input("Title Boost (%)", 0.0, 999.0, 10.0)
         free_speedup_minutes_2 = st.number_input("Free Speedup (minutes)", 0, 60, 5, key="fs2")
         free_speedup_extra_seconds_2 = st.number_input("Free Speedup (extra seconds)", 0, 59, 0, key="fs2s")
         guild_helps_2 = st.number_input("Guild Helps", 0, 100, 20, key="gh_title")
@@ -188,12 +188,16 @@ with tab3:
 
         # Without title
         before_helps_no_title = base_seconds
+        # print base seconds
+        st.info(f"Base Seconds: {base_seconds} seconds")
         after_helps_no_title = simulate_with_helps(before_helps_no_title, guild_helps_2)
         finish_no_title = datetime.combine(start_date2, start_time2) + timedelta(seconds=after_helps_no_title)
 
         # With title
         boost_with_title = current_boost + title_bonus
-        before_helps_with_title = base_seconds * (1 + current_boost / 100.0) / (1 + boost_with_title / 100.0)
+        st.info(f"Boost with Title: {boost_with_title}%")
+        before_helps_with_title = (base_seconds * (1 + current_boost / 100.0) + free_speedup_minutes_2 * 60 + free_speedup_extra_seconds_2) / (1 + boost_with_title / 100.0)
+
         after_helps_with_title = simulate_with_helps(before_helps_with_title, guild_helps_2)
         finish_with_title = datetime.combine(start_date2, start_time2) + timedelta(seconds=after_helps_with_title)
 
